@@ -16,3 +16,4 @@ app.listen(port, function() {
   console.log('서버가 성공적으로 켜졌습니다!');
   console.log('브라우저에서 http://localhost:3000 으로 접속해보세요.');
 });
+// Day 1 PR 올리기 연습 완료!
