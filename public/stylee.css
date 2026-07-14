@@ -1,0 +1,56 @@
+/* 전체 배경과 기본 폰트 설정 */
+body {
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+/* 상단 헤더 (양쪽 끝으로 배치) */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px dashed #4caf50;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+/* 글쓰기 버튼 디자인 */
+#write-btn {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 게시글 카드 디자인 */
+.post-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* 카드 맨 아래 날짜와 좋아요/댓글 영역 (양쪽 끝으로 배치) */
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    color: #888;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+/* 게시글이 없을 때 텅 빈 화면 디자인 */
+.empty-state {
+    text-align: center;
+    border: 2px dashed #4caf50;
+    padding: 50px;
+    border-radius: 10px;
+    color: #666;
+    background-color: white;
+}
