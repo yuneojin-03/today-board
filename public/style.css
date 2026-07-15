@@ -1,0 +1,168 @@
+/* 전체 배경과 기본 폰트 설정 */
+body {
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+/* 상단 헤더 (양쪽 끝으로 배치) */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px dashed #4caf50;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+/* 글쓰기 버튼 디자인 */
+#write-btn {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 게시글 카드 디자인 */
+.post-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* 카드 맨 아래 날짜와 좋아요/댓글 영역 (양쪽 끝으로 배치) */
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    color: #888;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+/* 게시글이 없을 때 텅 빈 화면 디자인 */
+.empty-state {
+    text-align: center;
+    border: 2px dashed #4caf50;
+    padding: 50px;
+    border-radius: 10px;
+    color: #666;
+    background-color: white;
+}
+
+/* Day 3: 게시글 상세 페이지 및 댓글 스타일 추가 */
+
+/* 뒤로가기 링크 버튼 꾸미기 */
+.back-btn {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* 게시글 삭제 버튼 (빨간색 테두리) */
+.delete-post-btn {
+    background-color: white;
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 상세 페이지 게시글 본문 영역 */
+.post-detail h1 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+/* 게시글 정보(날짜, 좋아요) 아래에 회색 선 추가 */
+.post-meta {
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+/* 본문 내용 (엔터 친 줄바꿈이 그대로 유지되도록 설정!) */
+.post-content {
+    min-height: 100px;
+    line-height: 1.6;
+    white-space: pre-wrap; 
+}
+
+/* 댓글 영역 윗부분 여백 */
+.comment-section {
+    margin-top: 40px;
+}
+
+.comment-section h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* 댓글 입력 창 영역 (Flexbox로 인풋창이 남는 공간 다 차지하게 만들기) */
+.comment-input-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#comment-input {
+    flex: 1; /* 남는 가로 공간을 모두 차지함 */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.comment-submit-btn {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 댓글 목록 스타일 */
+.comment-list {
+    list-style: none; /* 목록 앞에 붙는 점(bullet) 없애기 */
+    padding: 0;
+}
+
+.comment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #ddd;
+    padding: 15px 0;
+}
+
+/* 댓글 오른쪽 (시간 + 삭제 버튼) 묶음 */
+.comment-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 13px;
+    color: #888;
+}
+
+/* 댓글 삭제 버튼 (파란색 글씨, 배경 없음) */
+.delete-comment-btn {
+    background-color: transparent;
+    color: #3b82f6;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.empty-comment {
+    text-align: center;
+    color: #888;
+    padding: 30px;
+}
