@@ -25,7 +25,7 @@
             <!-- 게시글이 있을 때: for문으로 카드를 하나씩 그린다 -->
             <% for(let i = 0; i < posts.length; i++) { %>
                 <article class="post-card">
-                    <h2><%= posts[i].title %></h2>
+                    <h2><a href="/posts/<%= posts[i].id %>"><%= posts[i].title %></a></h2>
                     <p class="content-preview"><%= posts[i].content %></p>
                     
                     <div class="card-bottom">
