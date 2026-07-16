@@ -14,6 +14,9 @@ app.set('view engine', 'ejs');
 // public 폴더 안에 있는 파일(CSS, JS 등)을 브라우저가 쓸 수 있게 허락해 준다.
 app.use(express.static('public'));
 
+// 클라이언트가 보낸 JSON 데이터를 해석하게 해주는 기능이다.
+app.use(express.json());
+
 // 사용자가 메인 페이지('/')로 들어왔을 때 할 일을 정해준다.
 // async 키워드를 붙여서 비동기 함수로 만든다. (파일을 다 읽을 때까지 기다려주기 위함)
 app.get('/', async function(req, res) {
@@ -55,6 +58,41 @@ app.get('/posts/:id', async function(req, res) {
   } else {
     res.render('post', { post: targetPost });
   }
+});
+
+// 댓글 작성 API (CSR 방식으로 호출될 주소)
+app.post('/api/posts/:id/comments', async function(req, res) {
+  // 1. 기존 데이터 읽어오기
+  const fileData = await fs.readFile('./data.json', 'utf8');
+  const posts = JSON.parse(fileData);
+
+  // 주소창의 게시글 번호와, 클라이언트가 보낸 댓글 내용 꺼내기
+  const targetId = Number(req.params.id);
+  const newCommentContent = req.body.content; 
+
+  // 배열을 뒤져서 댓글을 달 게시글 찾기
+  let targetPost = null;
+  for(let i = 0; i < posts.length; i++) {
+    if(posts[i].id === targetId) {
+      targetPost = posts[i];
+      break;
+    }
+  }
+
+  // 새 댓글 정보 뭉치를 만들어서 해당 게시글의 comments 배열에 밀어 넣기
+  const newComment = {
+    id: Date.now(), // 안 겹치는 숫자(현재 시간)를 아이디로 씁니다.
+    content: newCommentContent,
+    date: "19:00" // 임시 고정 시간 (나중에는 진짜 시간으로 바꿀 수 있습니다)
+  };
+  targetPost.comments.push(newComment);
+
+  // 바뀐 전체 배열을 다시 문자열로 포장해서 data.json 파일에 덮어쓰기
+  // (JSON.stringify의 null, 2는 파일을 예쁘게 줄바꿈해서 저장하라는 뜻입니다)
+  await fs.writeFile('./data.json', JSON.stringify(posts, null, 2), 'utf8');
+
+  // 6. 브라우저에게 "성공했어!" 라고 답변(JSON) 보내주기
+  res.json({ success: true, message: '댓글 저장 성공!' });
 });
 
 // 서버를 켜고 사용자를 기다린다.
