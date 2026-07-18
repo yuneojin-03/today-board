@@ -95,6 +95,31 @@ app.post('/api/posts/:id/comments', async function(req, res) {
   res.json({ success: true, message: '댓글 저장 성공!' });
 });
 
+// 좋아요 올리기 API (CSR)
+
+app.post('/api/posts/:id/like', async function(req, res) {
+  const fileData = await fs.readFile('./data.json', 'utf8');
+  const posts = JSON.parse(fileData);
+  const targetId = Number(req.params.id);
+
+  let currentLikes = 0;
+
+  // 전체 글을 뒤져서 해당 게시글의 좋아요 수를 1 증가시킨다.
+  for(let i = 0; i < posts.length; i++) {
+    if(posts[i].id === targetId) {
+      posts[i].likes += 1;
+      currentLikes = posts[i].likes; // 1 증가된 최신 숫자를 기억해둔다.
+      break;
+    }
+  }
+
+  // 바뀐 전체 데이터를 다시 data.json 파일에 덮어쓴다.
+  await fs.writeFile('./data.json', JSON.stringify(posts, null, 2), 'utf8');
+
+  // 클라이언트에게 "성공했고, 이제 좋아요 숫자는 이거야!" 라고 알려준다.
+  res.json({ success: true, newLikes: currentLikes });
+});
+
 // 서버를 켜고 사용자를 기다린다.
 app.listen(port, function() {
   console.log('서버가 켜졌습니다: http://localhost:3000');
