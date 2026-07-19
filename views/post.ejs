@@ -50,7 +50,8 @@
                             <span class="comment-text"><%= post.comments[i].content %></span>
                             <div class="comment-right">
                                 <span class="comment-time"><%= post.comments[i].date %></span>
-                                <button class="delete-comment-btn">삭제</button>
+                                <!-- data-id 속성 추가 -->
+                                <button class="delete-comment-btn" data-id="<%= post.comments[i].id %>">삭제</button>
                             </div>
                         </li>
                     <% } %>

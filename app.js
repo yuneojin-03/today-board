@@ -124,3 +124,38 @@ app.post('/api/posts/:id/like', async function(req, res) {
 app.listen(port, function() {
   console.log('서버가 켜졌습니다: http://localhost:3000');
 });
+
+
+// 게시글 삭제 API (DELETE)
+
+app.delete('/api/posts/:id', async function(req, res) {
+  const fileData = await fs.readFile('./data.json', 'utf8');
+  let posts = JSON.parse(fileData);
+  const targetId = Number(req.params.id);
+
+  // filter를 사용해 "삭제하려는 id와 다른 글들만" 남겨서 덮어씌운다. (즉, 삭제됨)
+  posts = posts.filter(post => post.id !== targetId);
+
+  await fs.writeFile('./data.json', JSON.stringify(posts, null, 2), 'utf8');
+  res.json({ success: true });
+});
+
+
+// 댓글 삭제 API (DELETE)
+
+app.delete('/api/posts/:postId/comments/:commentId', async function(req, res) {
+  const fileData = await fs.readFile('./data.json', 'utf8');
+  const posts = JSON.parse(fileData);
+  const postId = Number(req.params.postId);
+  const commentId = Number(req.params.commentId);
+
+  const targetPost = posts.find(post => post.id === postId);
+  
+  if (targetPost) {
+    // filter를 사용해 "삭제하려는 댓글 id와 다른 댓글들만" 남긴다.
+    targetPost.comments = targetPost.comments.filter(comment => comment.id !== commentId);
+    await fs.writeFile('./data.json', JSON.stringify(posts, null, 2), 'utf8');
+  }
+  
+  res.json({ success: true });
+});
